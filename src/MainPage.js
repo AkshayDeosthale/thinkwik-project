@@ -11,6 +11,7 @@ const MainPage = () => {
   const [articles, setArticles] = useRecoilState(documentsState);
   const [email, setEmail] = useRecoilState(usernameState);
   const [loading, setLoading] = useState(true);
+  const [pro, setPro] = useState(0);
 
   const router = useNavigate();
 
@@ -22,7 +23,19 @@ const MainPage = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      console.log("Its loading ...");
+      setPro(25);
+    }, "1000");
+    setTimeout(() => {
+      setPro(50);
+    }, "2000");
+    setTimeout(() => {
+      setPro(75);
+    }, "3000");
+    setTimeout(() => {
+      setPro(100);
+    }, "4000");
+
+    setTimeout(() => {
       setLoading(false);
     }, "5000");
   }, []);
@@ -30,7 +43,13 @@ const MainPage = () => {
   return (
     <>
       {loading ? (
-        <div>Loading..</div>
+        <div className="h-screen w-screen flex justify-center items-center">
+          <progress
+            className="progress progress-success w-96"
+            value={pro}
+            max="100"
+          ></progress>
+        </div>
       ) : (
         <div>
           <Header />
