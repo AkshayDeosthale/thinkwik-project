@@ -20,12 +20,12 @@ const Login = () => {
     }
   };
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center">
+    <div className="h-screen w-screen flex flex-col justify-center items-center  ">
       <h1 className="text-3xl font-bold">Sign in</h1>
-      <div className="w-1/2 h-1/2 border p-2 rounded-lg flex flex-col justify-center items-center">
+      <div className="w-1/2 h-1/2 border p-2 rounded-lg flex flex-col justify-center items-center hover:shadow-xl shadow-black hover:transition-all">
         <form className="w-full flex flex-col justify-center items-center space-y-5">
           <input
-            type="text"
+            type="email"
             placeholder="Email"
             className="w-1/2 p-2 border outline-none"
             onChange={(e) => setEmail(e.target.value)}

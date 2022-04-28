@@ -1,15 +1,16 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { usernameState } from "./atoms/credentialAtom";
-import { documentsState, singledocumentState } from "./atoms/documents";
+import { documentsState } from "./atoms/documents";
 import Article from "./components/Article";
 import Header from "./components/Header";
 
 const MainPage = () => {
-  const [articles, setArticles] = useRecoilState(documentsState);
-  const [email, setEmail] = useRecoilState(usernameState);
+  // const [articles, setArticles] = useRecoilState(documentsState);
+  const articles = useRecoilValue(documentsState);
+  // const [email, setEmail] = useRecoilState(usernameState);
+  const email = useRecoilValue(usernameState);
   const [loading, setLoading] = useState(true);
   const [pro, setPro] = useState(0);
 
@@ -43,9 +44,9 @@ const MainPage = () => {
   return (
     <>
       {loading ? (
-        <div className="h-screen w-screen flex justify-center items-center">
+        <div className="h-screen w-screen flex justify-center items-center  ">
           <progress
-            className="progress progress-success w-96"
+            className="progress progress-success w-96 transition-all "
             value={pro}
             max="100"
           ></progress>
@@ -54,7 +55,7 @@ const MainPage = () => {
         <div>
           <Header />
           <div className="flex justify-center mt-3  h-full w-screen ">
-            <div className="w-3/4  border rounded-lg p-2 overflow-auto">
+            <div className="w-3/4  border rounded-lg p-2 overflow-auto hover:shadow-xl shadow-black hover:transition-all">
               <div className=" flex justify-around mb-4">
                 {" "}
                 <span className="text-center text-4xl font-semibold">
