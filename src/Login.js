@@ -6,6 +6,7 @@ import { passwordState, usernameState } from "./atoms/credentialAtom";
 const Login = () => {
   const [email, setEmail] = useRecoilState(usernameState);
   const [password, setPassword] = useRecoilState(passwordState);
+  const [incorrect, setIncorrect] = useState(false);
 
   const router = useNavigate();
 
@@ -14,6 +15,7 @@ const Login = () => {
     if (email === "username-test@yopmail.com" && password === "123456") {
       router("/MainPage");
     } else {
+      setIncorrect(true);
       console.log("Login failed");
     }
   };
@@ -43,12 +45,22 @@ const Login = () => {
             </button>
             <button
               className=" font-bold rounded-full py-2 px-5  active:scale-95 active:border-lime-500 hover:scale-105 text-white bg-blue-500"
-              onClick={() => router("/Signup")}
+              onClick={() => {
+                setEmail("");
+                setPassword("");
+                router("/Signup");
+              }}
             >
               Sign up
             </button>
           </div>
         </form>
+        {incorrect && (
+          <p className="mt-10 text-red-500 font-semibold">
+            Nah mate, put the correct creds. (Clue: username-test@yopmail.com |
+            123456 )
+          </p>
+        )}
       </div>
     </div>
   );

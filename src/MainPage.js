@@ -33,7 +33,7 @@ const MainPage = () => {
             <>
               <div className="flex flex-col space-y-3 ">
                 {articles.map((article, key) => (
-                  <Article article={article} />
+                  <Article article={article} key={key} />
                 ))}
               </div>
             </>

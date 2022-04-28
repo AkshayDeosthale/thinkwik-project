@@ -12,6 +12,11 @@ const ArticleDetails = () => {
   const [Body, setBody] = useState("");
   const router = useNavigate();
 
+  useEffect(() => {
+    setTitle(singleArticle.Title);
+    setBody(singleArticle.Body);
+  }, []);
+
   const submitReq = async (e) => {
     e.preventDefault();
 
@@ -32,7 +37,6 @@ const ArticleDetails = () => {
     router("/MainPage");
   };
 
-  console.log(id);
   return (
     <div className="h-screen w-screen flex justify-center items-center">
       <div className="w-1/2 h-1/3 border rounded-lg p-2 flex flex-col space-y-3">
@@ -56,7 +60,7 @@ const ArticleDetails = () => {
             onChange={(e) => setBody(e.target.value)}
           />
         </div>
-        <div>
+        <div className="space-x-20">
           <button
             className="text-xl bg-orange-500 rounded-lg p-2 text-white hover:scale-105 "
             onClick={submitReq}
