@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { usernameState } from "./atoms/credentialAtom";
 import { documentsState } from "./atoms/documents";
 import Article from "./components/Article";
 import Header from "./components/Header";
 
 const MainPage = () => {
-  // const [articles, setArticles] = useRecoilState(documentsState);
-  const articles = useRecoilValue(documentsState);
+  const [articles, setArticles] = useRecoilState(documentsState);
+  // const articles = useRecoilValue(documentsState);
   // const [email, setEmail] = useRecoilState(usernameState);
   const email = useRecoilValue(usernameState);
   const [loading, setLoading] = useState(true);
@@ -41,6 +41,14 @@ const MainPage = () => {
     }, "5000");
   }, []);
 
+  const handleSort = () => {
+    let tempArticles = JSON.parse(JSON.stringify(articles));
+    const sortedItem = tempArticles.sort((a, b) =>
+      a.Title.toLowerCase() > b.Title.toLowerCase() ? 1 : -1
+    );
+    setArticles(sortedItem);
+  };
+
   return (
     <>
       {loading ? (
@@ -61,12 +69,20 @@ const MainPage = () => {
                 <span className="text-center text-4xl font-semibold">
                   Document List
                 </span>
-                <button
-                  className="bg-blue-500 text-white font-semibold p-2 rounded-lg active:scale-90"
-                  onClick={() => router("/CreateArticle")}
-                >
-                  ADD
-                </button>
+                <div className="space-x-10">
+                  <button
+                    className="bg-purple-500 text-white font-semibold p-2 rounded-lg active:scale-90 hover:scale-105 "
+                    onClick={handleSort}
+                  >
+                    SORT
+                  </button>
+                  <button
+                    className="bg-blue-500 text-white font-semibold p-2 rounded-lg active:scale-90 hover:scale-105"
+                    onClick={() => router("/CreateArticle")}
+                  >
+                    ADD
+                  </button>
+                </div>
               </div>
               {articles.length !== 0 ? (
                 <>
